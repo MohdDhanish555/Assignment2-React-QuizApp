@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "question": "When does a new moon occur?",
+    "questionType": "radio",
+    "answerOptions": [
+      { "option": "Every 30 days", "isCorrect": true },
+      { "option": "Every 10 days", "isCorrect": false },
+      { "option": "Every 11 days", "isCorrect": false },
+      { "option": "Every 9 days", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "When are the primitive data types in JavaScript?",
+    "questionType": "checkbox",
+    "answerOptions": [
+      { "option": "string", "isCorrect": true },
+      { "option": "boolean", "isCorrect": true },
+      { "option": "object", "isCorrect": false },
+      { "option": "array", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "When are the primitive data types in JavaScript?",
+    "questionType": "checkbox",
+    "answerOptions": [
+      { "option": "string", "isCorrect": true },
+      { "option": "boolean", "isCorrect": true },
+      { "option": "object", "isCorrect": false },
+      { "option": "array", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "When are the t?",
+    "questionType": "checkbox",
+    "answerOptions": [
+      { "option": "string", "isCorrect": true },
+      { "option": "boolean", "isCorrect": true },
+      { "option": "object", "isCorrect": false },
+      { "option": "array", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "W data types in JavaScript?",
+    "questionType": "checkbox",
+    "answerOptions": [
+      { "option": "string", "isCorrect": true },
+      { "option": "boolean", "isCorrect": true },
+      { "option": "object", "isCorrect": false },
+      { "option": "array", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "When a data types in ?",
+    "questionType": "checkbox",
+    "answerOptions": [
+      { "option": "string", "isCorrect": true },
+      { "option": "boolean", "isCorrect": true },
+      { "option": "object", "isCorrect": false },
+      { "option": "array", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "List down all the lifecycle methods in React",
+    "questionType": "textInput",
+    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
+  },
+  {
+    "id": 8,
+    "question": "List down all the lifecycle methods in React",
+    "questionType": "textInput",
+    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
+  },
+  {
+    "id": 9,
+    "question": "List down all the lifecycle methods in React",
+    "questionType": "textInput",
+    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
+  },
+  {
+    "id": 10,
+    "question": "List down all the lifecycle methods in React",
+    "questionType": "textInput",
+    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
+  }
+]

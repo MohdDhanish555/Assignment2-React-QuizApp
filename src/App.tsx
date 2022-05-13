@@ -1,25 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Home from "./pages/Home";
+import Questions from "./pages/Questions";
+import Results from "./pages/Results";
+import { useState } from "react";
+import React from "react";
+
+export const AppContext: any = React.createContext([]);
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    tertiary: Palette["primary"];
+  }
+  interface PaletteOptions {
+    tertiary: PaletteOptions["primary"];
+  }
+}
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      // main: "#5893df",
+      main: "#e6c300",
+    },
+    secondary: {
+      main: "#cc0066",
+    },
+    tertiary: {
+      main: "#00e6e6",
+    },
+    text: {
+      primary: "#fff",
+    },
+  },
+});
 
 function App() {
+  const [answer, setAnswer] = useState({});
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={[answer, setAnswer]}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<h1>Error 404 : page not found</h1>} />
+            <Route path="/questions" element={<Questions />} />
+            <Route path="/results" element={<Results />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </AppContext.Provider>
   );
 }
 
