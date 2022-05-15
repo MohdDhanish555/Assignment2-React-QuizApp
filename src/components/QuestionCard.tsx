@@ -19,7 +19,11 @@ const QuestionCard = ({
   answers,
 }: QuestionProps) => {
   const [answer, setAnswer] = useContext(AppContext);
-  console.log(answer)  
+  
+  // const answersMapped = {option : answers.map((option) => option)}
+  // console.log(answersMapped.option[0].isCorrect);
+  
+
   return (
     <Box key={id} m="1rem 0">
       <Typography variant="h5" fontWeight="bold" mb="1.5rem">
@@ -30,6 +34,7 @@ const QuestionCard = ({
           case "textInput":
             return (
               <StyledTextField
+                autoFocus
                 id="outlined-basic"
                 variant="outlined"
                 value={answer[id]?.data || ""}
@@ -72,8 +77,9 @@ const QuestionCard = ({
               <CheckBoxOptions
               options={answers.map((ans: any) => {
                 return {
+                  isCorrect : ans.isCorrect,
                   option: ans.option,
-                  value: answer[id]?.data.includes(ans.option) || false,
+                  value: answer[id]?.data.includes(ans.option +","+ ans.isCorrect) || false,
                 };
               })}
                 handleChange={(event: any) => {
@@ -87,6 +93,7 @@ const QuestionCard = ({
                     const indexOfName = currentArray.indexOf(event.target.name);
                     currentArray.splice(indexOfName, 1);
                   }
+                  
                   setAnswer({
                     ...answer,
                     [id]: {

@@ -1,39 +1,64 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import ResultsCard from "../components/ResultsCard";
 import questions from "../questions.json";
 import { TOTAL_QUESTIONS } from "./Questions";
 import { useLocation } from "react-router-dom";
 
-
 const Results = () => {
   const { state }: any = useLocation();
-  console.log({ state })
-  console.log(state.correct)
+  console.log({ state });
+  console.log(state);
   return (
-    <Box>
-      <Typography variant="h4" fontWeight="bold" color="#fff">
-        My Responses
-      </Typography>
-      {questions.map((question) => (
-        <Box key={question.id}>
-          <ResultsCard
-            id={question.id}
-            question={question.question}
-            questionType={question.questionType}
-            answers={question.answerOptions}
-          />
-        </Box>
-      ))}
+    <Box display="flex" justifyContent="space-around" m="2rem">
       <Box>
-        <div
-          id="pieChart"
-          style={{
-            backgroundImage: `conic-gradient(green 0deg, green ${
-              (state.correct * 360) / TOTAL_QUESTIONS
-            }deg, 
-          red ${(state.correct * 360) / TOTAL_QUESTIONS}deg)`,
+        <Typography variant="h4" fontWeight="bold" color="#fff">
+          Your Response
+        </Typography>
+        {questions.map((question) => (
+          <Box key={question.id}>
+            <ResultsCard
+              id={question.id}
+              question={question.question}
+              questionType={question.questionType}
+              answers={question.answerOptions}
+            />
+          </Box>
+        ))}
+      </Box>
+      <Box>
+        <Paper
+          elevation={24}
+          sx={{
+            bgcolor: "#041C32",
+            borderRadius: "5px",
+            p: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
           }}
-        ></div>
+        >
+          <Typography variant="h5" fontWeight="bold" color="white">
+            Total Score
+          </Typography>
+          <Box>
+            <Typography variant="h3" color="primary">
+              {state.correct}/{TOTAL_QUESTIONS}
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              backgroundImage: `conic-gradient(yellowgreen 0deg, yellowgreen ${
+                (state.correct * 360) / TOTAL_QUESTIONS
+              }deg, 
+            red ${(state.correct * 360) / TOTAL_QUESTIONS}deg)`,
+              height: "200px",
+              width: "200px",
+              borderRadius: "50%",
+              border: "1px solid white",
+            }}
+          ></Box>
+        </Paper>
       </Box>
     </Box>
   );

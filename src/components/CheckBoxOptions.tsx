@@ -11,7 +11,7 @@ const CheckboxOptions = ({ options, handleChange }: CheckboxOptionsProps) => {
       {options.map((option: any) => (
         <FormControlLabel
           key={option.option}
-          name={option.option}
+          name={option.option +","+ option.isCorrect}
           onChange={handleChange}
           control={
             <Checkbox

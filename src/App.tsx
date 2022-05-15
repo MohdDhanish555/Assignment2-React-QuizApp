@@ -31,6 +31,10 @@ const theme = createTheme({
     },
     text: {
       primary: "#fff",
+      disabled: "#fff",
+    },
+    action: {
+      disabled: "#e6c300",
     },
   },
 });

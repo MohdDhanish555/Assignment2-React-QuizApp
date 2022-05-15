@@ -2,23 +2,38 @@ import {
   Box,
   Button,
   CircularProgress,
+  IconButton,
   Paper,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import QuestionCard from "../components/QuestionCard";
 import RightBar from "../components/RightBar";
 import questions from "../questions.json";
 import { AppContext } from "../App";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import React from "react";
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export const TOTAL_QUESTIONS = questions.length;
 let correct = 0;
-let wrong = 0;
+let correctAnswerId : number[] = []
+
 const Questions = () => {
   const [currentQuestion, setCurrentQuestion] = useState(questions[0].id);
   const [isLoading, setIsLoading] = useState(true);
   const [answer, setAnswer] = useContext(AppContext);
+  const [open, setOpen] = useState(true);
+
+  const { state }: any = useLocation();
 
   // LOADING CONDITION
 
@@ -38,39 +53,58 @@ const Questions = () => {
       {
         questions.map((question) => {
           if (answer[question.id]?.is_ans) {
-            question.answerOptions.map((option) => {
-              if (answer[question.id].type === "checkbox") {
-                let flag = true
-                answer[question.id].data?.map((value: any) => {
-                  if (value == option.option) {
-                    if (!option.isCorrect) {
-                      flag = false
-                    }
-                  } else {
-                    flag = false
-                  }
-                });
-                if (flag) {
-                  correct = correct + 1
-                  console.log("id :",question.id)
-                }
-              } else if (answer[question.id].data === option.option) {
+            if (answer[question.id]?.type === "checkbox") {
+              let totalCorrect = 0;
+              question.answerOptions.map((option) => {
                 if (option.isCorrect) {
-                  (correct = correct + 1);
-                  console.log("id :", question.id);
-                  
-                } 
+                  totalCorrect = totalCorrect + 1;
+                }
+              });
+              let selectedCorrect = 0;
+              let wrongAnswer = false;
+              answer[question.id]?.data.map((data: any) => {
+                const myOption = data.split(",");
+                if (myOption[1] == "true") {
+                  selectedCorrect = selectedCorrect + 1;
+                } else {
+                  wrongAnswer = true;
+                }
+              });
+              if (totalCorrect === selectedCorrect && !wrongAnswer) {
+                correct = correct + 1;
+                correctAnswerId.push(question.id);
               }
-            });
+            } else {
+              question.answerOptions.map((option) => {
+                if (answer[question.id].data === option.option) {
+                  if (option.isCorrect) {
+                    correct = correct + 1;
+                    correctAnswerId.push(question.id)
+                  }
+                }
+              });
+            }
           }
         });
       }
-      console.log(correct, wrong);
-      Navigate("/results", { state: { correct } });
+      console.log(correct);
+      Navigate("/results",{ state: { correct , wrong : TOTAL_QUESTIONS - correct , correctAnswerId } , replace : true });
     } else {
       setCurrentQuestion((prev) => prev + 1);
     }
   }
+
+  // SNACKBAR
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <>
@@ -84,7 +118,12 @@ const Questions = () => {
           <CircularProgress />
         </Box>
       ) : (
-        <Box height="100vh">
+        <Box
+          height="100vh"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
           {questions.map(
             (question) =>
               currentQuestion === question.id && (
@@ -143,6 +182,15 @@ const Questions = () => {
             currentQuestion={currentQuestion}
             setCurrentQuestion={setCurrentQuestion}
           />
+          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Good Luck {state.name} !!
+            </Alert>
+          </Snackbar>
         </Box>
       )}
     </>
