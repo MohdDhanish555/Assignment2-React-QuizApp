@@ -52,7 +52,6 @@ const ResultsCard = ({
   answers.map((option) => {
     if (option.isCorrect) {
       correctAnswer.push(option.option);
-      console.log(correctAnswer);
     }
   });
 
@@ -168,10 +167,6 @@ const ResultsCard = ({
                           }
                           label={option.option}
                           disabled
-                          // classes={{
-                          //   root: classes.root,
-                          //   label: classes.label,
-                          // }}
                         />
                       ))}
                     </FormGroup>

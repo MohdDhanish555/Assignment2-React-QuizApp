@@ -18,11 +18,7 @@ const QuestionCard = ({
   questionType,
   answers,
 }: QuestionProps) => {
-  const [answer, setAnswer] = useContext(AppContext);
-  
-  // const answersMapped = {option : answers.map((option) => option)}
-  // console.log(answersMapped.option[0].isCorrect);
-  
+  const [answer, setAnswer] = useContext(AppContext);  
 
   return (
     <Box key={id} m="1rem 0">

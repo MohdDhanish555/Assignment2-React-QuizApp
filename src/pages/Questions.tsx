@@ -88,7 +88,7 @@ const Questions = () => {
         });
       }
       console.log(correct);
-      Navigate("/results",{ state: { correct , wrong : TOTAL_QUESTIONS - correct , correctAnswerId } , replace : true });
+      Navigate("/results",{ state: { correct , correctAnswerId } , replace : true });
     } else {
       setCurrentQuestion((prev) => prev + 1);
     }
