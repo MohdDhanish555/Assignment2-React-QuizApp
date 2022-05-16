@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 
 type RadioProps = {
   options: Array<any>;
@@ -13,7 +13,7 @@ const RadioOptions = ({ options, value, handleChange }: RadioProps) => {
         aria-labelledby="demo-radio-buttons-group-label"
         name="controlled-radio-buttons-group"
         value={value}
-        onChange={handleChange ?? ""}
+        onChange={handleChange}
       >
         {options.map((option) => (
           <FormControlLabel

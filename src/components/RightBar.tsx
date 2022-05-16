@@ -6,7 +6,7 @@ import {
   PaginationItem,
   Typography,
 } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { AppContext } from "../App";
 import { TOTAL_QUESTIONS } from "../pages/Questions";
@@ -43,9 +43,9 @@ const RightBar = ({ currentQuestion, setCurrentQuestion }: RightBarProps) => {
         gap="1rem"
       >
         <Avatar sx={{ bgcolor: "rgba(230, 195, 0,.8)" }}>
-          {state.name.replace(/\s+/g, "")[0].toUpperCase()}
+          {state?.name?.replace(/\s+/g, "")[0].toUpperCase()}
         </Avatar>
-        {state.name}
+        {state?.name}
       </Box>
       <Paper
         elevation={24}
@@ -72,7 +72,7 @@ const RightBar = ({ currentQuestion, setCurrentQuestion }: RightBarProps) => {
           renderItem={(item) => {
             let paginationItemColor = "rgba(255,255,255,.3)";
             Object.entries(answer).map(([tempIndex, ans]: any) => {
-              if (ans?.is_ans) {
+              if (ans?.isAnswered) {
                 if (item.page?.toLocaleString() === tempIndex) {
                   paginationItemColor = "rgba(173,255,47,0.5)";
                 }
@@ -86,7 +86,7 @@ const RightBar = ({ currentQuestion, setCurrentQuestion }: RightBarProps) => {
                   margin: ".3rem",
                   " &:hover": {
                     backgroundColor: paginationItemColor,
-                    opacity: ".7"
+                    opacity: ".7",
                   },
                 }}
                 {...item}

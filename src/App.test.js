@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import App, { AppContext } from "./App";
 import CheckboxOptions from "./components/CheckBoxOptions";
@@ -8,6 +8,9 @@ import ResultsCard from "./components/ResultsCard";
 import RightBar from "./components/RightBar";
 import Home from "./pages/Home";
 import Results from "./pages/Results";
+import { StyledTextField } from "./pages/Home";
+import Questions from "./pages/Questions";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const handleChange = jest.fn();
 const setCurrentQuestion = jest.fn();
@@ -61,6 +64,20 @@ describe("Rendering All Components", () => {
     );
   });
 
+  test("QUESTIONS Rendering...", () => {
+    const wrapper = ({ children }) => (
+      <AppContext.Provider value={[answer, setAnswer]}>
+        {children}
+      </AppContext.Provider>
+    );
+    render(
+      <BrowserRouter>
+        <Questions />
+      </BrowserRouter>,
+      { wrapper }
+    );
+  });
+
   test("RESULTS Rendering...", () => {
     render(
       <BrowserRouter>
@@ -68,8 +85,6 @@ describe("Rendering All Components", () => {
       </BrowserRouter>
     );
   });
-    
-
 
   test("CHECKBOX OPTIONS Rendering...", () => {
     render(
@@ -91,10 +106,16 @@ describe("Rendering All Components", () => {
   });
 
   test("RIGHTBAR Rendering...", () => {
+    const wrapper = ({ children }) => (
+      <AppContext.Provider value={[answer, setAnswer]}>
+        {children}
+      </AppContext.Provider>
+    );
     render(
       <BrowserRouter>
         <RightBar currentQuestion={5} setCurrentQuestion={setCurrentQuestion} />
-      </BrowserRouter>
+      </BrowserRouter>,
+      { wrapper }
     );
   });
 });
@@ -104,42 +125,42 @@ const answer = {
   [1]: {
     data: ["Computer,false", "Mouse,true"],
     type: "checkbox",
-    is_ans: true,
+    isAnswered: true,
   },
   [2]: {
     data: ["Computer,false", "Mouse,true"],
     type: "checkbox",
-    is_ans: false,
+    isAnswered: false,
   },
   [3]: {
     data: "data",
     type: "radio",
-    is_ans: true,
+    isAnswered: true,
   },
   [4]: {
     data: "data",
     type: "radio",
-    is_ans: false,
+    isAnswered: false,
   },
   [5]: {
     data: "tech",
     type: "textInput",
-    is_ans: true,
+    isAnswered: true,
   },
   [6]: {
     data: "tech",
     type: "textInput",
-    is_ans: false,
+    isAnswered: false,
   },
   [7]: {
     data: "tech",
     type: "undefined",
-    is_ans: false,
+    isAnswered: false,
   },
   [8]: {
     data: "tech",
     type: "undefined",
-    is_ans: true,
+    isAnswered: true,
   },
 };
 
@@ -300,5 +321,144 @@ describe("Rendering Result Card Component", () => {
       />,
       { wrapper }
     );
+  });
+});
+
+// HANDLING ON CHANGE
+
+const setName = jest.fn();
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#e6c300",
+    },
+    secondary: {
+      main: "#cc0066",
+    },
+    tertiary: {
+      main: "#00e6e6",
+    },
+    text: {
+      primary: "#fff",
+      disabled: "#fff",
+    },
+    action: {
+      disabled: "#e6c300",
+    },
+  },
+});
+
+describe("Checking ONCHANGE", () => {
+  test("RADIO OPTIONS", () => {
+    const wrapper = ({ children }) => (
+      <AppContext.Provider value={[answer, setAnswer]}>
+        {children}
+      </AppContext.Provider>
+    );
+    render(
+      <QuestionCard
+        id={5}
+        question={"data"}
+        questionType={"radio"}
+        answers={[
+          { option: "option1", isCorrect: false },
+          { option: "option2", isCorrect: true },
+          { option: "option3", isCorrect: false },
+          { option: "option4", isCorrect: false },
+        ]}
+      />,
+      { wrapper }
+    );
+    const radioBox = screen.getByDisplayValue("option1");
+    fireEvent.click(radioBox, { target: { value: "option2" } });
+    expect(setAnswer).toHaveBeenCalledTimes(1);
+  });
+
+  test("TEXTINPUT FIELD IN ANSWERS", () => {
+    const wrapper = ({ children }) => (
+      <AppContext.Provider value={[answer, setAnswer]}>
+        {children}
+      </AppContext.Provider>
+    );
+    render(
+      <QuestionCard
+        id={11}
+        question={"data"}
+        questionType={"textInput"}
+        answers={[{ option: "option1", isCorrect: true }]}
+      />,
+      { wrapper }
+    );
+    const inputBox = screen.getByDisplayValue("");
+    fireEvent.change(inputBox, { target: { value: "option1" } });
+    expect(setAnswer).toHaveBeenCalledTimes(1);
+  });
+
+  test("CHECKBOX OPTIONS", () => {
+    const wrapper = ({ children }) => (
+      <AppContext.Provider value={[answer, setAnswer]}>
+        {children}
+      </AppContext.Provider>
+    );
+    render(
+      <QuestionCard
+        id={5}
+        question={"data"}
+        questionType={"checkbox"}
+        answers={[
+          { option: "option1", isCorrect: false },
+          { option: "option2", isCorrect: true },
+          { option: "option3", isCorrect: false },
+          { option: "option4", isCorrect: false },
+        ]}
+      />,
+      { wrapper }
+    );
+    const checkBox = screen.getByLabelText("option1");
+    fireEvent.click(checkBox, { target: { name: "option2" } });
+    expect(setAnswer).toHaveBeenCalledTimes(1);
+  });
+
+  test("INPUT FIELD OF NAME", () => {
+    const wrapper = ({ children }) => (
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>{children}</BrowserRouter>
+      </ThemeProvider>
+    );
+    render(<Home />, { wrapper });
+    const inputBox = screen.getByLabelText("Enter Your Name");
+    fireEvent.change(inputBox, { target: { value: "DANI" } });
+    expect(setName).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("prev button and Next Button", () => {
+  test("Prev Button", () => {
+    const wrapper = ({ children }) => (
+      <AppContext.Provider value={[answer, setAnswer]}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>{children}</BrowserRouter>
+        </ThemeProvider>
+      </AppContext.Provider>
+    );
+    render(<Questions />, { wrapper });
+    const prevButton = screen.getByDisplayValue("Prev");
+    fireEvent.click(prevButton);
+    expect(jest.fn()).toHaveBeenCalledTimes(1);
+  });
+
+  test("Next Button", () => {
+    const wrapper = ({ children }) => (
+      <AppContext.Provider value={[answer, setAnswer]}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>{children}</BrowserRouter>
+        </ThemeProvider>
+      </AppContext.Provider>
+    );
+    render(<Questions />, { wrapper });
+    const nextButton = screen.getByDisplayValue("Next");
+    fireEvent.click(nextButton);
+    expect(jest.fn()).toHaveBeenCalledTimes(1);
   });
 });

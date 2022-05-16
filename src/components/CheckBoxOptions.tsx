@@ -8,18 +8,18 @@ type CheckboxOptionsProps = {
 const CheckboxOptions = ({ options, handleChange }: CheckboxOptionsProps) => {
   return (
     <FormGroup>
-      {options.map((option: any) => (
+      {options.map((currentOption: any) => (
         <FormControlLabel
-          key={option.option}
-          name={option.option + "," + option.isCorrect}
+          key={currentOption.option}
+          name={currentOption.option + "," + currentOption.isCorrect}
           onChange={handleChange}
           control={
             <Checkbox
-              checked={option.value || false}
+              checked={currentOption.value || false}
               sx={{ color: "rgba(230, 195, 0,0.5)" }}
             />
           }
-          label={option.option}
+          label={currentOption.option}
         />
       ))}
     </FormGroup>

@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   CircularProgress,
-  IconButton,
   Paper,
   Snackbar,
   Typography,
@@ -25,7 +24,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 export const TOTAL_QUESTIONS = questions.length;
 let correct = 0;
-let correctAnswerId : number[] = []
+let correctAnswerId: number[] = [];
 
 const Questions = () => {
   const [currentQuestion, setCurrentQuestion] = useState(questions[0].id);
@@ -38,7 +37,7 @@ const Questions = () => {
   // LOADING CONDITION
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 1000);
+    setTimeout(() => setIsLoading(false), 0);
   }, []);
 
   // HANDLING PREV & NEXT BUTTON
@@ -52,7 +51,7 @@ const Questions = () => {
     if (currentQuestion === TOTAL_QUESTIONS) {
       {
         questions.map((question) => {
-          if (answer[question.id]?.is_ans) {
+          if (answer[question.id]?.isAnswered) {
             if (answer[question.id]?.type === "checkbox") {
               let totalCorrect = 0;
               question.answerOptions.map((option) => {
@@ -64,7 +63,7 @@ const Questions = () => {
               let wrongAnswer = false;
               answer[question.id]?.data.map((data: any) => {
                 const myOption = data.split(",");
-                if (myOption[1] == "true") {
+                if (myOption[1] === "true") {
                   selectedCorrect = selectedCorrect + 1;
                 } else {
                   wrongAnswer = true;
@@ -79,7 +78,7 @@ const Questions = () => {
                 if (answer[question.id].data === option.option) {
                   if (option.isCorrect) {
                     correct = correct + 1;
-                    correctAnswerId.push(question.id)
+                    correctAnswerId.push(question.id);
                   }
                 }
               });
@@ -88,7 +87,10 @@ const Questions = () => {
         });
       }
       console.log(correct);
-      Navigate("/results",{ state: { correct , correctAnswerId } , replace : true });
+      Navigate("/results", {
+        state: { correct, correctAnswerId },
+        replace: true,
+      });
     } else {
       setCurrentQuestion((prev) => prev + 1);
     }
@@ -102,7 +104,6 @@ const Questions = () => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
@@ -188,7 +189,7 @@ const Questions = () => {
               severity="success"
               sx={{ width: "100%" }}
             >
-              Good Luck {state.name} !!
+              Good Luck {state?.name} !!
             </Alert>
           </Snackbar>
         </Box>

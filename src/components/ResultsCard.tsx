@@ -19,10 +19,7 @@ import { ExpandMore, Check, Clear } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 
 type ResultsCardProps = {
-  //   data: string;
-  //   type: string;
-  //   isAnswered: Boolean;
-  //   index: number;
+
   id: number;
   question: string;
   questionType: string;
@@ -36,12 +33,13 @@ const ResultsCard = ({
   answers,
 }: ResultsCardProps) => {
   const [answer, setAnswer] = useContext(AppContext);
-  const { state }: any = useLocation();
+  const location : any = useLocation();
+  console.log(location)
 
   let accordianColor = "rgba(255,0,0,0.3)";
   let showCheckIcon = false;
   let showCorrectAnswer = true;
-  state.correctAnswerId.map((answerId: number) => {
+  location?.state?.correctAnswerId.map((answerId: number) => {
     if (answerId === id) {
       accordianColor = "rgba(0,255,0,0.3)";
       showCheckIcon = true;
