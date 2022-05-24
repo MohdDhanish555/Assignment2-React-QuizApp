@@ -65,7 +65,7 @@ const RightBar = ({ currentQuestion, setCurrentQuestion }: RightBarProps) => {
           page={currentQuestion}
           color="primary"
           onChange={handleChange}
-          boundaryCount={TOTAL_QUESTIONS / 2}
+          boundaryCount={TOTAL_QUESTIONS}
           size="large"
           hidePrevButton
           hideNextButton

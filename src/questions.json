@@ -1,92 +1,116 @@
 [
   {
     "id": 1,
-    "question": "When does a new moon occur?",
+    "question": "What is the use of the arrow function in react?",
     "questionType": "radio",
     "answerOptions": [
-      { "option": "Every 30 days", "isCorrect": true },
-      { "option": "Every 10 days", "isCorrect": false },
-      { "option": "Every 11 days", "isCorrect": false },
-      { "option": "Every 9 days", "isCorrect": false }
+      {
+        "option": "It allows you to predict the behaviour of bugs when passed as callbacks",
+        "isCorrect": false
+      },
+      {
+        "option": "It allows you to assign a function to a variable.",
+        "isCorrect": false
+      },
+      {
+        "option": "It allows you to return a callback from the function",
+        "isCorrect": false
+      },
+      {
+        "option": "It allows you to pass callbacks to a function",
+        "isCorrect": true
+      }
     ]
   },
   {
     "id": 2,
-    "question": "When are the primitive data types in JavaScript?",
-    "questionType": "checkbox",
+    "question": "React comes bundled with the following module for handling HTTP requests",
+    "questionType": "radio",
     "answerOptions": [
-      { "option": "string", "isCorrect": true },
-      { "option": "boolean", "isCorrect": true },
-      { "option": "object", "isCorrect": false },
-      { "option": "array", "isCorrect": false }
+      { "option": "Superagent", "isCorrect": false },
+      { "option": "Axios", "isCorrect": false },
+      { "option": "Fetch", "isCorrect": false },
+      { "option": "None of the above", "isCorrect": true }
     ]
   },
   {
     "id": 3,
-    "question": "When are the primitive data types in JavaScript?",
+    "question": "What is the syntax used for creating a React Fragment?",
     "questionType": "checkbox",
     "answerOptions": [
-      { "option": "string", "isCorrect": true },
-      { "option": "boolean", "isCorrect": true },
-      { "option": "object", "isCorrect": false },
-      { "option": "array", "isCorrect": false }
+      { "option": "<React.Fragment> </React.Fragment>", "isCorrect": true },
+      { "option": "<React></React>", "isCorrect": false },
+      { "option": "<> </>", "isCorrect": true },
+      { "option": "<ReactFragment></ReactFragment>", "isCorrect": false }
     ]
   },
   {
     "id": 4,
-    "question": "When are the t?",
-    "questionType": "checkbox",
+    "question": "fireEvent.click() method from RTL is used",
+    "questionType": "radio",
     "answerOptions": [
-      { "option": "string", "isCorrect": true },
-      { "option": "boolean", "isCorrect": true },
-      { "option": "object", "isCorrect": false },
-      { "option": "array", "isCorrect": false }
+      { "option": "to mimic a mouse movement", "isCorrect": true },
+      { "option": "to mimic a mouse scroll click", "isCorrect": false },
+      { "option": "to mimic a mouse left click", "isCorrect": false },
+      { "option": "to mimic a mouse right click", "isCorrect": false }
     ]
   },
   {
     "id": 5,
-    "question": "W data types in JavaScript?",
-    "questionType": "checkbox",
+    "question": "useEffect() can contain an async function as its argument. Is this true",
+    "questionType": "radio",
     "answerOptions": [
-      { "option": "string", "isCorrect": true },
-      { "option": "boolean", "isCorrect": true },
-      { "option": "object", "isCorrect": false },
-      { "option": "array", "isCorrect": false }
+      { "option": "Yes", "isCorrect": false },
+      { "option": "No", "isCorrect": true }
     ]
   },
   {
     "id": 6,
-    "question": "When a data types in ?",
-    "questionType": "checkbox",
-    "answerOptions": [
-      { "option": "string", "isCorrect": true },
-      { "option": "boolean", "isCorrect": true },
-      { "option": "object", "isCorrect": false },
-      { "option": "array", "isCorrect": false }
-    ]
+    "question": "List down all the lifecycle methods in React",
+    "questionType": "textInput",
+    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
   },
   {
     "id": 7,
-    "question": "List down all the lifecycle methods in React",
-    "questionType": "textInput",
-    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
+    "question": "screen.getByText() method from React Testing Library",
+    "questionType": "radio",
+    "answerOptions": [
+      {
+        "option": "retrieves the element which has the containing text",
+        "isCorrect": true
+      },
+      {
+        "option": "retrieves the text which is passed as the parameter",
+        "isCorrect": true
+      },
+      {
+        "option": "retrieves the parent element which has the containing text",
+        "isCorrect": false
+      },
+      {
+        "option": "retrieves the child element which has the containing text",
+        "isCorrect": false
+      }
+    ]
   },
   {
     "id": 8,
-    "question": "List down all the lifecycle methods in React",
-    "questionType": "textInput",
-    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
+    "question": "jest.fn() is generally used to",
+    "questionType": "radio",
+    "answerOptions": [
+      { "option": "copy a function", "isCorrect": false },
+      { "option": "mock a function", "isCorrect": true },
+      { "option": "clone a function", "isCorrect": false },
+      { "option": "call a function", "isCorrect": false }
+    ]
   },
   {
     "id": 9,
-    "question": "List down all the lifecycle methods in React",
-    "questionType": "textInput",
-    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
-  },
-  {
-    "id": 10,
-    "question": "List down all the lifecycle methods in React",
-    "questionType": "textInput",
-    "answerOptions": [{ "option": "componentDidMount", "isCorrect": true }]
+    "question": "Does this assertion 'expect({ a: 2 }).not.toEqual({ b:3 });' pass?",
+    "questionType": "radio",
+    "answerOptions": [
+      { "option": "Yes", "isCorrect": true },
+      { "option": "No", "isCorrect": false }
+    ]
   }
 ]

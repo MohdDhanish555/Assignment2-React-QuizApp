@@ -166,13 +166,19 @@ const Questions = () => {
                   </Paper>
                   <Box display="flex" justifyContent="space-between">
                     <Button
+                      data-testid="prev-btn"
                       variant="outlined"
                       onClick={handlePrevButton}
                       disabled={currentQuestion === 1}
+                      sx={{
+                        "&:disabled" : {
+                          color : "rgba(255,255,255,.1)"
+                        }
+                      }}
                     >
                       Prev
                     </Button>
-                    <Button variant="outlined" onClick={handleNextButton}>
+                    <Button data-testid="next-btn" variant="outlined" onClick={handleNextButton}>
                       {currentQuestion === TOTAL_QUESTIONS ? "Submit" : "Next"}
                     </Button>
                   </Box>

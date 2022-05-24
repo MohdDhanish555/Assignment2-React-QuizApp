@@ -34,7 +34,6 @@ const ResultsCard = ({
 }: ResultsCardProps) => {
   const [answer, setAnswer] = useContext(AppContext);
   const location : any = useLocation();
-  console.log(location)
 
   let accordianColor = "rgba(255,0,0,0.3)";
   let showCheckIcon = false;
